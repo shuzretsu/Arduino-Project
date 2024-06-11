@@ -26,8 +26,9 @@
 // mendefinisi ukuran layar oled
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
+#define OLED_RESET -1
 // OLED I2C menggunakan address 0x3C
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 //definisi DHT11 sensor pada pin 
 #define DHTPIN 2       // Pin 2 untuk mengkoneksikan data untuk modul dht
 #define DHTTYPE DHT11  // Tipe modul = DHT 11
@@ -45,7 +46,7 @@ void setup() {
   dht.begin();
   
   // inisialisasi untuk mendisplay OLED
-  if(!display.begin(SSD1306_I2C_ADDRESS, 0x3C)) {
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("Alokasi SSD1306 GAGAL"));
     for(;;);
   }
